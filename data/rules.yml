@@ -1,0 +1,22 @@
+version: "2.0"
+
+rules:
+
+
+- rule: Activate form
+  steps:
+  - intent: greet
+  - action: userForm
+  - active_loop: userForm
+
+- rule: Submit form
+  condition:
+  - active_loop: userForm
+  steps:
+  - action: userForm
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_login
+
+  #- action: utter_slots_values
